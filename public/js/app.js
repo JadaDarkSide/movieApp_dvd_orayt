@@ -2,50 +2,6 @@
 
 class App{
 	constructor(){
-		this.movies = [
-			{
-				"Title":"Winter Is Coming",
-				"Year":"2011",
-				"Director":"Timothy Van Patten",
-				"Poster":"/img/winteriscoming.jpg",
-				"Actors":"Sean Bean, Mark Addy, Nikolaj Coster-Waldau, Michelle Fairley"
-			},
-			{
-				"Title":"The North Remembers",
-				"Year":"2012",
-				"Director":"Alan Taylor",
-				"Poster":"/img/thenorthremembers.jpg",
-				"Actors":"Peter Dinklage, Lena Headey, Nikolaj Coster-Waldau, Michelle Fairley"
-			},
-			{
-				"Title":"Valar Dohaeris",
-				"Year":"2013",
-				"Director":"Daniel Minahan",
-				"Poster":"/img/valar.jpg",
-				"Actors":"Peter Dinklage, Lena Headey, Emilia Clarke, Kit Harington"
-			},
-			{
-				"Title":"Two Swords",
-				"Year":"2014",
-				"Director":"D.B. Weiss",
-				"Poster":"/img/twoswords.jpg",
-				"Actors":"Peter Dinklage, Nikolaj Coster-Waldau, Lena Headey, Emilia Clarke"
-			},
-			{
-				"Title":"The Wars to Come",
-				"Year":"2015",
-				"Director":"Michael Slovis",
-				"Poster":"/img/thewarstocome.jpg",
-				"Actors":"Peter Dinklage, Nikolaj Coster-Waldau, Lena Headey, Emilia Clarke"
-			},
-			{
-				"Title":"The Red Woman",
-				"Year":"2016",
-				"Director":"Jeremy Podeswa",
-				"Poster":"/img/redwoman.jpg",
-				"Actors":"Peter Dinklage, Nikolaj Coster-Waldau, Lena Headey, Emilia Clarke"
-			}
-		];
 	}
 
 	render(html, component){
@@ -59,49 +15,12 @@ class App{
 	}
 
 	createMovie(){
-		let t = document.getElementById('newTitle');
-		let y = document.getElementById('newYear');
-		let d = document.getElementById('newDirector');
-		let p = document.getElementById('newPoster');
-		let a = document.getElementById('newActors');
-
-		let movie = {"Title":t.value,"Year":y.value,"Director":d.value,"Poster":p.value,"Actors":a.value};
-		this.movies.push(movie);
-
-		t.value = y.value = d.value = p.value = a.value = ''; //Clear Fields
-		this.movieListInfo();
 	}
 
 	deleteMovie(key){		
-		let table = document.getElementById('movieListInfo');
-		table.deleteRow(key);
-		this.movies.splice(key,1);
-
-		// let m = this.movies;
-		// let dummy = [];
-		// for(let i=0;i<m;i++){
-		// 	if(key!=i){
-		// 		dummy.push(m[i]);
-		// 	}
-		// }
-		// this.movies = dummy;
-		let details = document.getElementById('movieDetails');
-		details.innerHTML = "";
-		this.movieListInfo();		
 	}
 
 	updateMovie(key){
-		let y = document.getElementById('updateYear');
-		let d = document.getElementById('updateDirector');
-		let a = document.getElementById('updateActors');
-
-		let m = this.movies[key];
-		let movie = {"Title":m.Title,"Year":y.value,"Director":d.value,"Poster":m.Poster,"Actors":a.value};
-
-		this.movies[key] = movie;
-		let details = document.getElementById('movieDetails');
-		details.innerHTML = "";
-		this.movieListInfo();			
 	}
 }
 
@@ -109,114 +28,92 @@ class Component extends App{
 	constructor(){
 		super();
 	}
+	brandList(){
+		this.render(`
+				  <nav>
+				  
+    		<div class="nav-wrapper">
+      <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Gadgets</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="sass.html">Naghimo</a></li>
+        <li><a href="badges.html">Brand List</a></li>
 
-	movieList(){
-		this.render(
-			`
-	<nav class="navbar navbar-default" role="navigation">
-	<div class="navbar-header">
-	<button type="button" class="navbar-toggle" data-toggle="collapse"
-	data-target="#example-navbar-collapse">
-	<span class="sr-only">Toggle navigation</span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	<span class="icon-bar"></span>
-	 </button>
-	 <a class="navbar-brand" href="#">Movie App</a>
-	 </div>
-	 <div class="collapse navbar-collapse" id="example-navbar-collapse">
-	 <ul class="nav navbar-nav">
-	 <li class="active"><a href="#">New Movie</a></li>
-	 <li><a href="#">Movie List</a></li>	 
-	 </ul>
-	 </div>
-	</nav>
-				<div class="row">
-					<div class="col col-sm-6">
-						<div id="movieCreate"></div>						
-					</div>
-					<div class="col col-sm-6">
-						<h1>Movie List</h1>
-						<table id="movieList" class="table">
-							<thead>
-								<tr>
-									<th>Title</th>
-									<th>Year</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody id="movieListInfo"></tbody>
-						</table>
-					</div>
-				</div>
-				<div id="movieDetails"></div>
-			`
-			,document.getElementById('app'));
-		this.movieListInfo();
-	}
+   <form>
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      </ul>
+    </div>
+  </nav>
 
-	movieListInfo(){
-		let html = "";
-		let m = this.movies;
-		for(let i=0;i<m.length;i++){
-			html += `
-				<tr>
-					<td>${m[i].Title}</td>
-					<td>${m[i].Year}</td>
-					<td><button class="btn btn-primary"  onclick="component.movieDetails(${i})">Show Details</button></td>
-				</tr>
-			`;
-		}
-		this.reRender(html,document.getElementById('movieListInfo'));
-	}
+  		<div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/iphone.jpg">
+              <span class="card-title">Iphone 7 256gb</span>
+            </div>
+            <div class="card-content">
+              <p>iPhone 7 now has the best performance and battery life ever, as well as new finishes, water resistance, and stereo speakers.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-	movieDetails(key){
-		this.reRender(
-			`
-				<h1>Movie Details</h1>
-				<div class="media">
-				    <div class="media-left">
-				        <a href="#">
-				            <img class="media-object img-thumbnail" src="${this.movies[key].Poster}" width="220" />
-				        </a>
-				    </div>
-				    <div class="media-body" id="movieDetailsInfo">
-				        <h4 class="media-heading">${this.movies[key].Title}</h4>
-				        Year: ${this.movies[key].Year}<br/>
-						Director: ${this.movies[key].Director}<br/>
-						Actors: ${this.movies[key].Actors}<br/>
-						<button class="btn btn-success" onclick="component.movieUpdate(${key})">Update</button>
-						<button class="btn btn-danger" onclick="component.deleteMovie(${key})">Delete</button>
-					</div>	
-				</div>			
-			`,document.getElementById('movieDetails'));
-	}
+      		<div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src="img/samsung.jpg">
+              <span class="card-title">Samsung S7 and S7 Edge</span>
+            </div>
+            <div class="card-content">
+              <p>Experience the newest Samsung phone! The Galaxy S7 & Galaxy S7 edge feature water-resistance, enhanced cameras and ability to add a microSD Card.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">This is a link</a>
+            </div>
+          </div>
+        </div>
+      </div>	
 
-	movieCreate(){
-		this.render(
-			`
-				<h1>New Movie</h1>
-				Title: <input class="form-control" id="newTitle" type="" placeholder="Enter Title" /><br/>
-				Year: <input class="form-control" id="newYear" type="" placeholder="Enter Title" /><br/>
-				Director: <input class="form-control" id="newDirector" type="" placeholder="Enter Director" /><br/>
-				Poster: <input class="form-control" id="newPoster" type="" placeholder="Enter Poster" /><br/>
-				Actors: <input class="form-control" id="newActors" type="" placeholder="Separate using comma" /><br/>
-				<button class="btn btn-primary" onclick="component.createMovie()">Create</button>
-			`,document.getElementById('movieCreate'));
-	}
+           <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Gadgets Content</h5>
+                <p class="grey-text text-lighten-4">This is Gadget Buy and Sell</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a href="http://www.apple.com/ph/iphone-7/">Link 1</a></li>
+                  <li><a href="http://www.samsung.com/us/explore/galaxy-s7-features-and-specs/">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+             	
 
-	movieUpdate(key){
-		this.reRender(
-			`
-					<h4 class="media-heading">${this.movies[key].Title}</h4>
-			        Year: <input id="updateYear" type="text" value="${this.movies[key].Year}" /><br/>
-					Director: <input id="updateDirector" type="text" value="${this.movies[key].Director}" /><br/>
-					Actors: <input id="updateActors" type="text" value="${this.movies[key].Actors}" /><br/>
-					<button class="btn btn-success" onclick="component.updateMovie(${key})">Save</button>
-			`,document.getElementById('movieDetailsInfo'));
+			`,document.getElementById("app"));
 	}
 }
 
 let component = new Component();
-component.movieList();
-component.movieCreate();
+component.brandList();
+// component.movieCreate();
